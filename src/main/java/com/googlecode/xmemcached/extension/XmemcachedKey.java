@@ -1,0 +1,83 @@
+package com.googlecode.xmemcached.extension;
+
+import com.googlecode.xmemcached.extension.util.Strings;
+
+import java.util.Objects;
+import java.util.StringJoiner;
+import java.util.function.Function;
+
+public enum XmemcachedKey {
+
+	/**
+	 * 用户坐标缓存
+	 */
+	USER_GEO_LOCATION("用户坐标", (userId)->{
+		return getKeyStr(XmemcachedKeyConstant.USER_GEO_LOCATION_KEY);
+    })
+
+	;
+
+	private String desc;
+    private Function<Object, String> function;
+
+    XmemcachedKey(String desc, Function<Object, String> function) {
+        this.desc = desc;
+        this.function = function;
+    }
+
+    public String getDesc() {
+		return desc;
+	}
+
+    /**
+     * 1、获取全名称key
+     * @return 无参数组合后的redis缓存key
+     */
+    public String getKey() {
+        return this.function.apply(null);
+    }
+
+    /**
+     * 1、获取全名称key
+     * @param key 缓存key的部分值
+     * @return key参数组合后的redis缓存key
+     */
+    public String getKey(Object key) {
+        return this.function.apply(key);
+    }
+
+    public static String REDIS_PREFIX = "rds";
+    public final static String DELIMITER = ":";
+
+    public static String getKeyStr(Object... args) {
+        StringJoiner tempKey = new StringJoiner(DELIMITER);
+        tempKey.add(REDIS_PREFIX);
+        for (Object s : args) {
+            if (Objects.isNull(s) || !Strings.hasText(s.toString())) {
+                continue;
+            }
+            tempKey.add(s.toString());
+        }
+        return tempKey.toString();
+    }
+
+    public static String getThreadKeyStr(String prefix, Object... args) {
+
+        StringJoiner tempKey = new StringJoiner(DELIMITER);
+        tempKey.add(prefix);
+        tempKey.add(String.valueOf(Thread.currentThread().getId()));
+        for (Object s : args) {
+            if (Objects.isNull(s) || !Strings.hasText(s.toString())) {
+                continue;
+            }
+            tempKey.add(s.toString());
+        }
+        return tempKey.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getKeyStr(233,""));
+    }
+
+
+}
