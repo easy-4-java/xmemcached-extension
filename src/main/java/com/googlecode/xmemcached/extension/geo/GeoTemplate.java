@@ -10,18 +10,47 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Stateless geodetic distance helpers for the {@code xmemcached-extension}
+ * toolkit.
+ *
+ * <p>Wraps Mike Gavaghan's {@code geodesy} library and exposes convenience
+ * overloads for the two most common {@link Ellipsoid ellipsoids}
+ * ({@link Ellipsoid#Sphere}, {@link Ellipsoid#WGS84}) in addition to a
+ * fully customisable entry point that accepts any {@link Ellipsoid}. All
+ * overloads return distances in metres.</p>
+ *
+ * <p>Coordinates are expressed in decimal degrees following the
+ * latitude-first convention used by the underlying {@code geodesy}
+ * library.</p>
+ *
+ * @author wandl
+ * @since 3.0.0
+ * @see GeodeticCalculator
+ * @see Ellipsoid
+ */
 @Slf4j
 public class GeoTemplate {
 
 
 
 	/**
-	 * 计算两点之间距离 https://www.cnblogs.com/zhaoyanhaoBlog/p/10121499.html
-	 * @param longitude1	：坐标1经度
-	 * @param latitude1		：坐标1维度
-	 * @param longitude2	：坐标2经度
-	 * @param latitude2		：坐标2维度
-	 * @return	计算结果（单位：米）
+	 * Compute the great-circle distance between two points on a perfect
+	 * sphere using the simplified spherical-law-of-cosines formula.
+	 *
+	 * <p>This overload assumes a constant earth radius of {@code 6371 km}
+	 * and is therefore less accurate than the
+	 * {@link #getDistance(Ellipsoid, double, double, double, double) general-purpose}
+	 * variant, but cheaper to compute because it skips the
+	 * {@link GeodeticCalculator} allocation.</p>
+	 *
+	 * @param latitude1  latitude of the first point in decimal degrees
+	 * @param longitude1 longitude of the first point in decimal degrees
+	 * @param latitude2  latitude of the second point in decimal degrees
+	 * @param longitude2 longitude of the second point in decimal degrees
+	 * @return the spherical distance in metres
+	 * @see #getSphereDistance(double, double, double, double)
+	 * @see #getWGS84Distance(double, double, double, double)
 	 */
 	public double getDistance(double latitude1, double longitude1, double latitude2, double longitude2) {
 
@@ -31,15 +60,10 @@ public class GeoTemplate {
 		double lon1 = (Math.PI / 180) * longitude1;
 		double lon2 = (Math.PI / 180) * longitude2;
 
-//      double Lat1r = (Math.PI/180)*(gp1.getLatitudeE6()/1E6);
-//      double Lat2r = (Math.PI/180)*(gp2.getLatitudeE6()/1E6);
-//      double Lon1r = (Math.PI/180)*(gp1.getLongitudeE6()/1E6);
-//      double Lon2r = (Math.PI/180)*(gp2.getLongitudeE6()/1E6);
-
-		// 地球半径
+		// Mean earth radius, kilometres.
 		double R = 6371;
 
-		// 两点间距离 km，如果想要米的话，结果*1000就可以了
+		// Spherical-law-of-cosines distance, kilometres; converted to metres below.
 		double d = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1))
 				* R;
 
@@ -47,57 +71,77 @@ public class GeoTemplate {
 	}
 
 	/**
-	 * 1、计算Sphere模式下两个坐标点的距离（单位：米）
-	 * @param longitude1	：坐标1经度
-	 * @param latitude1		：坐标1维度
-	 * @param longitude2	：坐标2经度
-	 * @param latitude2		：坐标2维度
-	 * @return	计算结果（单位：米）
+	 * Compute the ellipsoidal distance using {@link Ellipsoid#Sphere}.
+	 *
+	 * @param latitude1  latitude of the first point in decimal degrees
+	 * @param longitude1 longitude of the first point in decimal degrees
+	 * @param latitude2  latitude of the second point in decimal degrees
+	 * @param longitude2 longitude of the second point in decimal degrees
+	 * @return the distance in metres
+	 * @see #getDistance(Ellipsoid, double, double, double, double)
 	 */
 	public double getSphereDistance(double latitude1, double longitude1, double latitude2, double longitude2) {
 		return this.getDistance(Ellipsoid.Sphere, latitude1, longitude1, latitude2, longitude2);
 	}
 
 	/**
-	 * 2、计算WGS84模式下两个坐标点的距离（单位：米）
-	 * @param longitude1	：坐标1经度
-	 * @param latitude1		：坐标1维度
-	 * @param longitude2	：坐标2经度
-	 * @param latitude2		：坐标2维度
-	 * @return	计算结果（单位：米）
+	 * Compute the ellipsoidal distance using {@link Ellipsoid#WGS84}, the
+	 * ellipsoid used by the Global Positioning System.
+	 *
+	 * @param latitude1  latitude of the first point in decimal degrees
+	 * @param longitude1 longitude of the first point in decimal degrees
+	 * @param latitude2  latitude of the second point in decimal degrees
+	 * @param longitude2 longitude of the second point in decimal degrees
+	 * @return the distance in metres
+	 * @see #getDistance(Ellipsoid, double, double, double, double)
 	 */
 	public double getWGS84Distance(double latitude1, double longitude1, double latitude2, double longitude2) {
 	    return this.getDistance(Ellipsoid.WGS84, latitude1, longitude1, latitude2, longitude2);
 	}
 
 	/**
-	 * 2、计算指定模式下两个坐标点的距离（单位：米）
-	 * @param ellipsoid		：坐标计算模式
-	 * @param longitude1	：坐标1经度
-	 * @param latitude1		：坐标1维度
-	 * @param longitude2	：坐标2经度
-	 * @param latitude2		：坐标2维度
-	 * @return	计算结果（单位：米）
+	 * Compute the ellipsoidal distance using the supplied {@link Ellipsoid}.
+	 *
+	 * @param ellipsoid  the ellipsoid model to use (e.g. {@link Ellipsoid#WGS84}
+	 *                   or {@link Ellipsoid#Sphere})
+	 * @param latitude1  latitude of the first point in decimal degrees
+	 * @param longitude1 longitude of the first point in decimal degrees
+	 * @param latitude2  latitude of the second point in decimal degrees
+	 * @param longitude2 longitude of the second point in decimal degrees
+	 * @return the ellipsoidal distance in metres
+	 * @see GeodeticCalculator#calculateGeodeticCurve(Ellipsoid, GlobalCoordinates, GlobalCoordinates)
 	 */
 	public double getDistance(Ellipsoid ellipsoid, double latitude1, double longitude1, double latitude2, double longitude2) {
 
-		// 1、此处可以传入起始点经纬度
+		// Starting point coordinates.
 		GlobalCoordinates gpsFrom = new GlobalCoordinates(latitude1, longitude1);
 
-		// 2、此处可以传入目标点经纬度
+		// Destination point coordinates.
 		GlobalCoordinates gpsTo = new GlobalCoordinates(latitude2, longitude2);
 
-	    // 3、调用计算方法，传入坐标系、经纬度用于计算距离
+	    // Delegate to the geodesy library and surface the resulting curve length.
 	    return this.getDistance(gpsFrom, gpsTo, ellipsoid);
 
 	}
 
+	/**
+	 * Low-level overload that accepts pre-built {@link GlobalCoordinates}
+	 * instances, useful when the same origin point is reused across many
+	 * distance computations.
+	 *
+	 * @param gpsFrom  starting point; must not be {@code null}
+	 * @param gpsTo    destination point; must not be {@code null}
+	 * @param ellipsoid ellipsoid model to use; must not be {@code null}
+	 * @return the ellipsoidal distance in metres
+	 * @see GeodeticCalculator#calculateGeodeticCurve(Ellipsoid, GlobalCoordinates, GlobalCoordinates)
+	 */
 	public double getDistance(GlobalCoordinates gpsFrom, GlobalCoordinates gpsTo, Ellipsoid ellipsoid){
 
-        // 1、创建GeodeticCalculator，调用计算方法，传入坐标系、经纬度用于计算距离
+        // Build a one-shot calculator; the geodesy library is stateless, so a
+        // new instance per call is the canonical usage pattern.
         GeodeticCurve geoCurve = new GeodeticCalculator().calculateGeodeticCurve(ellipsoid, gpsFrom, gpsTo);
 
-        // 2、获取计算结果
+        // Surface only the ellipsoidal distance in metres.
         return geoCurve.getEllipsoidalDistance();
     }
 
