@@ -36,7 +36,12 @@ class AuthInfoProviderTest {
         custom.put(new InetSocketAddress("memcached.local", 11211),
                 AuthInfo.plain("user", "pass"));
 
-        AuthInfoProvider provider = () -> custom;
+        AuthInfoProvider provider = new AuthInfoProvider() {
+            @Override
+            public Map<InetSocketAddress, AuthInfo> getAuthInfoMap() {
+                return custom;
+            }
+        };
         Map<InetSocketAddress, AuthInfo> map = provider.getAuthInfoMap();
 
         assertEquals(1, map.size());

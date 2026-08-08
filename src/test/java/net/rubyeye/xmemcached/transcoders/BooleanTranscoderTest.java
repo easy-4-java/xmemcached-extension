@@ -65,14 +65,14 @@ class BooleanTranscoderTest {
     @Test
     void shouldDecodeSpecialBooleanWhenFlagMatches() {
         BooleanTranscoder transcoder = new BooleanTranscoder();
-        // primitiveAsString is false.
+        // primitiveAsString is false. TranscoderUtils encodes true as '1', false as '0'.
 
         CachedData trueData = new CachedData(SerializingTranscoder.SPECIAL_BOOLEAN,
-                new byte[] { 'T' });
+                new byte[] { '1' });
         assertEquals(Boolean.TRUE, transcoder.decode(trueData));
 
         CachedData falseData = new CachedData(SerializingTranscoder.SPECIAL_BOOLEAN,
-                new byte[] { 'F' });
+                new byte[] { '0' });
         assertEquals(Boolean.FALSE, transcoder.decode(falseData));
     }
 
@@ -97,13 +97,14 @@ class BooleanTranscoderTest {
     @Test
     void shouldDelegatePackZerosToTranscoderUtils() {
         BooleanTranscoder transcoder = new BooleanTranscoder();
-        assertFalse(transcoder.isPackZeros());
-
-        transcoder.setPackZeros(true);
+        // PrimitiveTypeTranscoder initializes TranscoderUtils with packZeros=true.
         assertTrue(transcoder.isPackZeros());
 
         transcoder.setPackZeros(false);
         assertFalse(transcoder.isPackZeros());
+
+        transcoder.setPackZeros(true);
+        assertTrue(transcoder.isPackZeros());
     }
 
     @Test

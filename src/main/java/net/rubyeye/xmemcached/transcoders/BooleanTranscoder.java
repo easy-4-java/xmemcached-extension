@@ -17,7 +17,7 @@ package net.rubyeye.xmemcached.transcoders;
  * single-byte representation. Any other flag causes {@code decode} to
  * return {@code null}.</p>
  *
- * @author wandl
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see PrimitiveTypeTranscoder
  * @see SerializingTranscoder

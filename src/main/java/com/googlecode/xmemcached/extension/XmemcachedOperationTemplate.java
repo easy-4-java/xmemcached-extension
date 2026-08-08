@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.rubyeye.xmemcached.CASOperation;
 import net.rubyeye.xmemcached.Counter;
 import net.rubyeye.xmemcached.GetsResponse;
+import net.rubyeye.xmemcached.MemcachedClient;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.transcoders.*;
 
@@ -12,7 +13,6 @@ import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * High-level, Spring-free operation facade over an
@@ -31,10 +31,11 @@ import java.util.stream.Stream;
  * constructor when performing increment / decrement operations, so callers
  * can tune the latency budget in a single place.</p>
  *
- * @author wandl
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see XMemcachedClient
  * @see XMemcachedOperationException
+ * @see XmemcachedKey
  */
 @Slf4j
 public class XmemcachedOperationTemplate {
@@ -83,10 +84,10 @@ public class XmemcachedOperationTemplate {
     };
 
     /**
-     * Underlying xmemcached client used by every operation exposed by this
+     * Underlying memcached client used by every operation exposed by this
      * template. Set at construction time and never re-bound.
      */
-    XMemcachedClient xMemcachedClient;
+    MemcachedClient xMemcachedClient;
     /**
      * Cached timeout (in seconds) applied to {@code incr} / {@code decr}
      * variants that accept a {@code long opTimeout} argument. A value of
@@ -104,7 +105,7 @@ public class XmemcachedOperationTemplate {
      *                          in which case {@code 0} (no timeout) is used
      * @throws NullPointerException if {@code xMemcachedClient} is {@code null}
      */
-    public XmemcachedOperationTemplate(XMemcachedClient xMemcachedClient, Duration opTimeout) {
+    public XmemcachedOperationTemplate(MemcachedClient xMemcachedClient, Duration opTimeout) {
         this.xMemcachedClient = xMemcachedClient;
         this.optTimeout = opTimeout == null ? 0L : opTimeout.getSeconds();
     }
@@ -661,7 +662,8 @@ public class XmemcachedOperationTemplate {
     public <T> Map<String, T> mGetFor(Collection<String> keys, Function<Object, T> mapper) {
         Map<String, Object> members = this.mGet(keys);
         if (Objects.nonNull(members)) {
-            return members.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, mapper));
+            return members.entrySet().stream()
+                    .collect(Collectors.toMap(Map.Entry::getKey, e -> mapper.apply(e.getValue())));
         }
         return null;
     }
@@ -711,7 +713,7 @@ public class XmemcachedOperationTemplate {
 
     /**
      * Batch-read keys after namespacing each one through
-     * {@link XmemcachedKey#getKeyStr(String, String)} with the supplied
+     * {@link XmemcachedKey#getKeyStr(Object...)} with the supplied
      * {@code redisPrefix}.
      *
      * @param <T>         target type

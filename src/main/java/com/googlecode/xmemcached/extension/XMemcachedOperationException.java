@@ -13,7 +13,7 @@ package com.googlecode.xmemcached.extension;
  * <p>Instances are produced exclusively by {@link XmemcachedOperationTemplate};
  * callers normally do not throw this exception directly.</p>
  *
- * @author wandl
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see XmemcachedOperationTemplate
  */

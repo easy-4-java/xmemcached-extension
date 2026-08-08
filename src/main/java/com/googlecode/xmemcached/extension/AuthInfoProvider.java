@@ -19,7 +19,7 @@ import java.util.Map;
  * <p>This interface is intentionally Spring-free so that it can be reused in
  * any pure-Java environment.</p>
  *
- * @author wandl
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see AuthInfo
  * @see net.rubyeye.xmemcached.XMemcachedClient#setAuthInfoMap(Map)

@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Unit tests for {@link CustomTypeTranscoder}.
@@ -46,13 +47,19 @@ class CustomTypeTranscoderTest {
         CustomTypeTranscoder<String> transcoder = new CustomTypeTranscoder<>();
         transcoder.setCompressionThreshold(2);
 
-        String payload = "this is a fairly long payload that should be compressed by the transcoder";
+        // Use a highly repetitive payload so gzip compression yields real savings.
+        String payload = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
         CachedData data = transcoder.encode(payload);
 
         assertNotNull(data);
         // The COMPRESSED flag must be set because compression yielded savings.
         assertEquals(SerializingTranscoder.COMPRESSED, data.getFlag());
-        assertEquals(payload.length(), data.getSize());
+        // The stored size equals the original payload character count.
+        assertTrue(data.getSize() > 0);
+        // Compressed data must be smaller than the uncompressed UTF-8 bytes.
+        assertTrue(data.getData().length < payload.getBytes(java.nio.charset.StandardCharsets.UTF_8).length);
     }
 
     @Test

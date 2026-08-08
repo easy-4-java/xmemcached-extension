@@ -15,7 +15,7 @@ package net.rubyeye.xmemcached.transcoders;
  * instrumentation) where round-tripping the value is unnecessary.</p>
  *
  * @param <T> value type handled by this transcoder
- * @author wandl
+ * @author [@Loong Wan](https://github.com/loong10k)
  * @since 3.0.0
  * @see BaseSerializingTranscoder
  * @see Transcoder

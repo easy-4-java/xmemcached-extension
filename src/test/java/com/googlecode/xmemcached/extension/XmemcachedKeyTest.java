@@ -109,11 +109,14 @@ class XmemcachedKeyTest {
 
     @Test
     void shouldThrowWhenConstructorIsInvokedViaReflection() throws NoSuchMethodException {
-        Constructor<XmemcachedKey> ctor = XmemcachedKey.class.getDeclaredConstructor(String.class, java.util.function.Function.class);
+        // Enum constructors have synthetic (String name, int ordinal) prefix parameters.
+        Constructor<XmemcachedKey> ctor = XmemcachedKey.class.getDeclaredConstructor(
+                String.class, int.class, String.class, java.util.function.Function.class);
         ctor.setAccessible(true);
-        // Enum constructor enforces single-instantiation semantics via the JVM,
-        // which surfaces as an IllegalArgumentException at the reflection level.
-        assertThrows(InvocationTargetException.class, () -> ctor.newInstance("ignored", (java.util.function.Function<Object, String>) obj -> "x"));
+        // The JVM prevents reflective creation of enum constants.
+        assertThrows(IllegalArgumentException.class, () ->
+                ctor.newInstance("EXTRA", 99, "desc",
+                        (java.util.function.Function<Object, String>) obj -> "x"));
     }
 
     @Test
