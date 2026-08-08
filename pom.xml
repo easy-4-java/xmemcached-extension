@@ -54,7 +54,7 @@
 
     <!-- 版本属性定义：Java 版本、依赖版本与 Maven 插件版本统一管理 -->
     <properties>
-        <central-maven-publishing-plugin.version>0.11.0</central-maven-publishing-plugin.version>
+        <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <!-- Branch line: 3.0.x (JDK 21 baseline) -->
         <java.version>21</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
