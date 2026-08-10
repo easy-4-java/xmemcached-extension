@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * exercise every method on the template without requiring a live memcached
  * server.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see XmemcachedOperationTemplate
  */

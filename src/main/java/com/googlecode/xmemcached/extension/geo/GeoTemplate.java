@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  * latitude-first convention used by the underlying {@code geodesy}
  * library.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see GeodeticCalculator
  * @see Ellipsoid

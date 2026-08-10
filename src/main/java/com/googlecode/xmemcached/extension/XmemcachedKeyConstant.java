@@ -10,7 +10,7 @@ package com.googlecode.xmemcached.extension;
  * they can be referenced directly without instantiation; the parent class
  * is {@code abstract} to prevent accidental subclassing.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see XmemcachedKey
  */

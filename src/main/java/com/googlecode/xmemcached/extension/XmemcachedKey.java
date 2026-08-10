@@ -21,7 +21,7 @@ import java.util.function.Function;
  * needing an enum constant and are also reused internally by
  * {@link XmemcachedOperationTemplate}.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see XmemcachedKeyConstant
  * @see XmemcachedOperationTemplate

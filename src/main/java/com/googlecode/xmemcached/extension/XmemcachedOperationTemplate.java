@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * constructor when performing increment / decrement operations, so callers
  * can tune the latency budget in a single place.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see XMemcachedClient
  * @see XMemcachedOperationException

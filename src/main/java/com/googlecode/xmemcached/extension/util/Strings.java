@@ -11,7 +11,7 @@ package com.googlecode.xmemcached.extension.util;
  * <p>Implemented locally to keep {@code xmemcached-extension} free of any Spring
  * dependency.</p>
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 3.0.0
  * @see Character#isWhitespace(char)
  */
