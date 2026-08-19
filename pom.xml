@@ -37,7 +37,7 @@
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
         <developerConnection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</developerConnection>
         <url>https://github.com/easy-4-java/${project.artifactId}</url>
-        <tag>HEAD</tag>
+        <tag>${project.artifactId}</tag>
     </scm>
 
     <!-- 制品发布仓库配置（distributionManagement） -->
@@ -57,9 +57,7 @@
             <!-- Branch line: 2.0.x (JDK 17 baseline) -->
             <java.version>17</java.version>
             <maven.compiler.release>${java.version}</maven.compiler.release>
-            <maven.compiler.source>${java.version}</maven.compiler.source>
-            <maven.compiler.target>${java.version}</maven.compiler.target>
-            <maven.version>3.0</maven.version>
+            <maven.version>3.9.16</maven.version>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <!-- Dependency versions -->
             <api.compatibility.version>0.0.0</api.compatibility.version>
@@ -459,8 +457,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
                     <parameters>true</parameters>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <maxmem>512M</maxmem>
