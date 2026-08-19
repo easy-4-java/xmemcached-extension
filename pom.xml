@@ -36,7 +36,7 @@
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
         <developerConnection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</developerConnection>
         <url>https://github.com/easy-4-java/${project.artifactId}</url>
-        <tag>HEAD</tag>
+        <tag>${project.artifactId}</tag>
     </scm>
 
     
@@ -53,11 +53,10 @@
 
     
     <properties>
-            <java.version>8</java.version>
+        <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
+            <java.version>1.8</java.version>
             <maven.compiler.release>8</maven.compiler.release>
-            <maven.compiler.source>${java.version}</maven.compiler.source>
-            <maven.compiler.target>${java.version}</maven.compiler.target>
-            <maven.version>3.0</maven.version>
+            <maven.version>3.9.16</maven.version>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <!-- Dependency versions -->
             <api.compatibility.version>0.0.0</api.compatibility.version>
