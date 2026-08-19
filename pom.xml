@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>io.github.easy4j</groupId>
     <artifactId>xmemcached-extension</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -9,7 +8,6 @@
     <description>Pure-Java extension library for xmemcached: operation templates, key builders, transcoders and geo utilities, independent from Spring.</description>
     <version>2.0.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
-
     <!-- 开源协议采用 Apache 2.0 协议 -->
     <licenses>
         <license>
@@ -38,39 +36,38 @@
     </developers>
     <!-- 版本属性定义：Java 版本、依赖版本与 Maven 插件版本统一管理 -->
     <properties>
-    <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
-            <java.version>17</java.version>
-            <maven.compiler.release>${java.version}</maven.compiler.release>
-            <maven.version>3.9.16</maven.version>
-            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- Dependency versions -->
-            <api.compatibility.version>0.0.0</api.compatibility.version>
-            <assertj.version>3.27.7</assertj.version>
-            <central-maven-publishing-plugin.version>0.11.0</central-maven-publishing-plugin.version>
-            <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
-            <geodesy.version>1.1.3</geodesy.version>
-            <junit-jupiter.version>5.11.4</junit-jupiter.version>
-            <junit.version>4.13.2</junit.version>
-            <lombok.version>1.18.38</lombok.version>
-            <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-            <slf4j.version>2.0.18</slf4j.version>
-            <xmemcached.version>2.4.7</xmemcached.version>
-    <!-- Maven Plugin versions -->
-            <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
-            <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
-            <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
-            <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
-            <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
-            <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-            <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
-            <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
-            <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
-            <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
-            <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
-            <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
-            <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-            <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-    
+        <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
+        <java.version>17</java.version>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
+        <maven.version>3.9.16</maven.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Dependency versions -->
+        <api.compatibility.version>0.0.0</api.compatibility.version>
+        <assertj.version>3.27.7</assertj.version>
+        <central-maven-publishing-plugin.version>0.11.0</central-maven-publishing-plugin.version>
+        <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
+        <geodesy.version>1.1.3</geodesy.version>
+        <junit-jupiter.version>5.11.4</junit-jupiter.version>
+        <junit.version>4.13.2</junit.version>
+        <lombok.version>1.18.38</lombok.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <slf4j.version>2.0.18</slf4j.version>
+        <xmemcached.version>2.4.7</xmemcached.version>
+        <!-- Maven Plugin versions -->
+        <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
+        <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+        <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+        <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
+        <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
+        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
+        <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
     </properties>
     <!-- 依赖版本统一管理（dependencyManagement） -->
     <dependencyManagement>
@@ -182,7 +179,6 @@
     <build>
         <pluginManagement>
             <plugins>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
                 <plugin>
                     <!-- 清理插件：清理构建输出目录 -->
@@ -190,7 +186,6 @@
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
                 <plugin>
                     <!-- 编译插件：编译主代码至主输出目录 -->
@@ -210,14 +205,12 @@
                         </annotationProcessorPaths>
                     </configuration>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-enforcer-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -234,14 +227,14 @@
                                 <rules>
                                     <requireMavenVersion>
                                         <message>
-                                                                                        Maven ${maven.version} or newer is required to build this project.
-                                                                                </message>
+                                                                                                                                                                                Maven ${maven.version} or newer is required to build this project.
+                                                                                                                                                                </message>
                                         <version>[${maven.version},)</version>
                                     </requireMavenVersion>
                                     <requireJavaVersion>
                                         <message>
-                                                                                        JDK ${java.version} or newer is required to build this branch.
-                                                                                </message>
+                                                                                                                                                                                JDK ${java.version} or newer is required to build this branch.
+                                                                                                                                                                </message>
                                         <version>[${java.version},)</version>
                                     </requireJavaVersion>
                                 </rules>
@@ -270,7 +263,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-gpg-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -286,14 +278,12 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>${maven-install-plugin.version}</version>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -309,7 +299,6 @@
                         </archive>
                     </configuration>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -332,7 +321,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -346,7 +334,6 @@
                         <goals>deploy</goals>
                     </configuration>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-resources-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -356,7 +343,6 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -372,7 +358,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -383,7 +368,6 @@
                         <argLine>-Xmx1024m -Dfile.encoding=UTF-8</argLine>
                     </configuration>
                 </plugin>
-
                 <!-- https://mvnrepository.com/artifact/org.sonatype.central/central-publishing-maven-plugin -->
                 <plugin>
                     <groupId>org.sonatype.central</groupId>
@@ -399,7 +383,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-
             <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -443,7 +426,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -462,7 +444,6 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -478,7 +459,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -494,14 +474,12 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven-deploy-plugin.version}</version>
             </plugin>
-
             <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-install-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -520,7 +498,6 @@
                 </property>
             </activation>
         </profile>
-
         <!-- 发布到 Maven Central Portal：mvn -Prelease deploy -->
         <profile>
             <id>release</id>
