@@ -219,8 +219,8 @@
                                     </requireMavenVersion>
                                     <requireJavaVersion>
                                         <message>
-                                                                                        JDK ${java.version} or newer is required to build this branch.
-                                                                                </message>
+                                                                                                                                                                                JDK ${java.version} or newer is required to build this branch.
+                                                                                                                                                                </message>
                                         <version>[${java.version},)</version>
                                     </requireJavaVersion>
                                 </rules>
