@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>io.github.easy4j</groupId>
     <artifactId>xmemcached-extension</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -9,8 +8,6 @@
     <version>3.0.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>Pure-Java extension library for xmemcached: operation templates, key builders, transcoders and geo utilities, independent from Spring.</description>
-
-    
     <!-- 开源协议采用 Apache 2.0 协议 -->
     <licenses>
         <license>
@@ -19,8 +16,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    
     <!-- 开发者信息 -->
     <developers>
         <developer>
@@ -32,8 +27,6 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
-
-    
     <!-- 源码仓库（SCM）信息 -->
     <scm>
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
@@ -41,88 +34,76 @@
         <url>https://github.com/easy-4-java/${project.artifactId}</url>
         <tag>${project.artifactId}</tag>
     </scm>
-
-    
     <properties>
-<!-- ═══ 第一段: 基础属性（自然排序）═══ -->
-            <java.version>1.8</java.version>
-            <maven.compiler.release>8</maven.compiler.release>
-            <maven.version>3.9.16</maven.version>
-            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- Dependency versions -->
-            <api.compatibility.version>0.0.0</api.compatibility.version>
-            <assertj.version>3.27.7</assertj.version>
-            <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
-            <geodesy.version>1.1.3</geodesy.version>
-            <junit-jupiter.version>5.11.4</junit-jupiter.version>
-            <junit.version>4.13.2</junit.version>
-            <lombok.version>1.18.38</lombok.version>
-            <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-            <slf4j.version>2.0.18</slf4j.version>
-            <xmemcached.version>2.4.7</xmemcached.version>
-    <!-- Maven Plugin versions -->
-            <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
-            <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
-            <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
-            <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
-            <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
-            <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-            <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
-            <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
-            <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
-            <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
-            <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
-            <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
-            <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
-            <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
+        <java.version>1.8</java.version>
+        <maven.compiler.release>8</maven.compiler.release>
+        <maven.version>3.9.16</maven.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Dependency versions -->
+        <api.compatibility.version>0.0.0</api.compatibility.version>
+        <assertj.version>3.27.7</assertj.version>
+        <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
+        <geodesy.version>1.1.3</geodesy.version>
+        <junit-jupiter.version>5.11.4</junit-jupiter.version>
+        <junit.version>4.13.2</junit.version>
+        <lombok.version>1.18.38</lombok.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <slf4j.version>2.0.18</slf4j.version>
+        <xmemcached.version>2.4.7</xmemcached.version>
+        <!-- Maven Plugin versions -->
+        <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
+        <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+        <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+        <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+        <maven-jacoco-plugin.version>0.8.15</maven-jacoco-plugin.version>
+        <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
+        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+        <maven-release-plugin.version>3.3.1</maven-release-plugin.version>
+        <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
     </properties>
-
-    
     <dependencyManagement>
         <dependencies>
-            
             <dependency>
                 <groupId>com.googlecode.xmemcached</groupId>
                 <artifactId>xmemcached</artifactId>
                 <version>${xmemcached.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>org.gavaghan</groupId>
                 <artifactId>geodesy</artifactId>
                 <version>${geodesy.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>${junit-jupiter.version}</version>
             </dependency>
-            
             <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
@@ -130,51 +111,40 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    
     <dependencies>
-        
         <dependency>
             <groupId>com.googlecode.xmemcached</groupId>
             <artifactId>xmemcached</artifactId>
         </dependency>
-        
         <dependency>
             <groupId>org.gavaghan</groupId>
             <artifactId>geodesy</artifactId>
         </dependency>
-        
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-        
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    
     <profiles>
         <profile>
             <id>api-compatibility</id>
@@ -184,8 +154,6 @@
                 </property>
             </activation>
         </profile>
-
-        
         <profile>
             <id>release</id>
         </profile>
@@ -205,18 +173,12 @@
     <build>
         <pluginManagement>
             <plugins>
-
-                
                 <plugin>
-                    
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
                 </plugin>
-
-                
                 <plugin>
-                    
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
@@ -233,15 +195,11 @@
                         </annotationProcessorPaths>
                     </configuration>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin.version}</version>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
@@ -257,20 +215,19 @@
                                 <rules>
                                     <requireMavenVersion>
                                         <message>
-                                                                                        Maven ${maven.version} or newer is required to build this project.
-                                                                                </message>
+                                                                                                                                                                                Maven ${maven.version} or newer is required to build this project.
+                                                                                                                                                                </message>
                                         <version>[${maven.version},)</version>
                                     </requireMavenVersion>
                                     <requireJavaVersion>
                                         <message>
-                                                                                        JDK ${java.version} or newer is required to build this branch.
-                                                                                </message>
+                                                                                                                                                                                JDK ${java.version} or newer is required to build this branch.
+                                                                                                                                                                </message>
                                         <version>[${java.version},)</version>
                                     </requireJavaVersion>
                                 </rules>
                             </configuration>
                         </execution>
-                        
                         <execution>
                             <id>ban-spring-dependencies</id>
                             <phase>validate</phase>
@@ -293,8 +250,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
@@ -309,15 +264,11 @@
                         </execution>
                     </executions>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>${maven-install-plugin.version}</version>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
@@ -332,8 +283,6 @@
                         </archive>
                     </configuration>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -355,8 +304,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
@@ -369,8 +316,6 @@
                         <goals>deploy</goals>
                     </configuration>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -379,8 +324,6 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
@@ -395,8 +338,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -406,8 +347,6 @@
                         <argLine>-Xmx1024m -Dfile.encoding=UTF-8</argLine>
                     </configuration>
                 </plugin>
-
-                
                 <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
@@ -422,8 +361,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-
-            
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -466,15 +403,13 @@
                     </execution>
                 </executions>
             </plugin>
-
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <release>${java.version}</release>
-                        <parameters>true</parameters>
+                    <parameters>true</parameters>
                     <encoding>${project.build.sourceEncoding}</encoding>
                     <maxmem>512M</maxmem>
                     <annotationProcessorPaths>
@@ -486,8 +421,6 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -502,8 +435,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -518,15 +449,11 @@
                     </execution>
                 </executions>
             </plugin>
-
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>${maven-deploy-plugin.version}</version>
             </plugin>
-
-            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
