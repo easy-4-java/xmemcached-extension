@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.easy4j</groupId>
     <artifactId>xmemcached-extension</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
     <url>https://github.com/easy-4-java/${project.artifactId}</url>
-    <version>3.0.x.20260630-SNAPSHOT</version>
+    <version>1.0.x.20260630-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>Pure-Java extension library for xmemcached: operation templates, key builders, transcoders and geo utilities, independent from Spring.</description>
-    <!-- 开源协议采用 Apache 2.0 协议 -->
+    
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -16,7 +16,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    <!-- 开发者信息 -->
+    
     <developers>
         <developer>
             <name>wandl</name>
@@ -27,7 +27,7 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
-    <!-- 源码仓库（SCM）信息 -->
+    
     <scm>
         <connection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</connection>
         <developerConnection>scm:git:https://github.com/easy-4-java/${project.artifactId}.git</developerConnection>
@@ -35,12 +35,12 @@
         <tag>${project.artifactId}</tag>
     </scm>
     <properties>
-        <!-- ═══ 第一段: 基础属性（自然排序）═══ -->
+        
         <java.version>1.8</java.version>
         <maven.compiler.release>8</maven.compiler.release>
         <maven.version>3.9.16</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Dependency versions -->
+        
         <api.compatibility.version>0.0.0</api.compatibility.version>
         <assertj.version>3.27.7</assertj.version>
         <clirr-maven-plugin.version>2.8</clirr-maven-plugin.version>
@@ -51,7 +51,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <slf4j.version>2.0.18</slf4j.version>
         <xmemcached.version>2.4.7</xmemcached.version>
-        <!-- Maven Plugin versions -->
+        
         <maven-central-publishing-plugin.version>0.11.0</maven-central-publishing-plugin.version>
         <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
@@ -158,7 +158,7 @@
             <id>release</id>
         </profile>
     </profiles>
-    <!-- 制品发布仓库配置（distributionManagement） -->
+    
     <distributionManagement>
         <repository>
             <id>2624322-release-6F6h6R</id>
@@ -169,7 +169,7 @@
             <url>https://packages.aliyun.com/6927b116e6c3e0425dbdf60d/maven/2624322-snapshot-3eoov3</url>
         </snapshotRepository>
     </distributionManagement>
-    <!-- 构建配置（Build） -->
+    
     <build>
         <pluginManagement>
             <plugins>
